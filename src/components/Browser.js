@@ -79,6 +79,28 @@ export default class Browser extends Component {
       return <Text>Loading...</Text>;
     }
 
-    return <Photo key={photos[currentIndex].id} data={photos[currentIndex]} />;
+    const previousPhoto = photos[currentIndex - 1];
+    const currentPhoto = photos[currentIndex];
+    const nextPhoto = photos[currentIndex + 1];
+
+    return (
+      <>
+        {previousPhoto && (
+          <Photo
+            key={previousPhoto.id + "preload"}
+            data={previousPhoto}
+            display="none"
+          />
+        )}
+        <Photo key={currentPhoto.id} data={currentPhoto} prefetch={true} />
+        {nextPhoto && (
+          <Photo
+            key={nextPhoto.id + "preload"}
+            data={nextPhoto}
+            display="none"
+          />
+        )}
+      </>
+    );
   }
 }
