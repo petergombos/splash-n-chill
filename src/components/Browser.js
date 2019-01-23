@@ -8,7 +8,7 @@ export default class Browser extends Component {
   state = {
     photos: null,
     currentIndex: 0,
-    currentPage: 100
+    currentPage: 0
   };
 
   componentDidMount() {
@@ -68,7 +68,11 @@ export default class Browser extends Component {
   preFetchImages = images => {
     images.forEach(image => {
       const img = new Image();
+      img.importance = "low";
       img.src = image.urls.regular;
+      const avatar = new Image();
+      avatar.importance = "low";
+      avatar.src = image.user.profile_image.large;
     });
   };
 
