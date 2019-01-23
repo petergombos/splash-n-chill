@@ -20,6 +20,33 @@ export default class Browser extends Component {
     document.onkeydown = undefined;
   }
 
+  toggleFullScreen() {
+    const fullscreenElement =
+      document.fullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement ||
+      document.webkitFullscreenElement;
+    if (!fullscreenElement) {
+      const fullscreenRequester =
+        document.documentElement.requestFullscreen ||
+        document.documentElement.webkitRequestFullScreen ||
+        document.documentElement.mozRequestFullScreen ||
+        document.documentElement.msRequestFullScreen;
+      if (fullscreenRequester) {
+        fullscreenRequester.call(document.documentElement);
+      }
+    } else {
+      const exitFullscreen =
+        document.exitFullscreen ||
+        document.webkitExitFullscreen ||
+        document.mozExitFullscreen ||
+        document.msExitFullscreen;
+      if (exitFullscreen) {
+        exitFullscreen.call(document);
+      }
+    }
+  }
+
   handleKeyDown = e => {
     const {photos, currentIndex} = this.state;
     // Transition to the next photo
@@ -36,6 +63,8 @@ export default class Browser extends Component {
       this.setState(state => ({
         currentIndex: Math.min(state.currentIndex + 1, state.photos.length - 1)
       }));
+    } else if (e.keyCode === 13) {
+      this.toggleFullScreen();
     }
   };
 
