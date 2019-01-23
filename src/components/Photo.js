@@ -28,6 +28,10 @@ export class Photo extends Component {
     this.full.src = urls.full;
   }
 
+  componentWillUnmount() {
+    this.full.src = "";
+  }
+
   render() {
     const {
       data: {urls, user}
@@ -35,7 +39,10 @@ export class Photo extends Component {
     const {isFullLoaded} = this.state;
     return (
       <View
-        backgroundImage={`url(${isFullLoaded ? this.full.src : urls.regular})`}
+        bg="black"
+        style={{
+          backgroundImage: `url(${isFullLoaded ? this.full.src : urls.regular})`
+        }}
         backgroundPosition="center"
         backgroundSize="cover"
         height="100%"
