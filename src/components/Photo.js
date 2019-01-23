@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import "styled-components/macro";
 
 import View from "./View";
 import Flex from "./Flex";
@@ -51,15 +52,44 @@ export class Photo extends Component {
         }}
         backgroundPosition="center"
         backgroundSize="cover"
-        height="100%"
+        height="100vh"
         width="100%"
         {...rest}
       >
-        <Flex position="fixed" bottom={3} left={3}>
+        <Flex
+          position="absolute"
+          bottom={0}
+          left={0}
+          p={3}
+          justifyContent="flex-start"
+          width="100%"
+          css="background-image:linear-gradient(-175deg,rgba(238, 238, 238, 0),92%,rgba(69, 69, 69, 0.58) 105%)"
+        >
           <Avatar src={user.profile_image.large} mr={2} />
-          <Text fontSize={3} fontWeight="semibold" color="white">
-            {user.name}
-          </Text>
+          <View>
+            <Text
+              fontSize={2}
+              fontWeight="semibold"
+              color="white"
+              as="a"
+              target="_blank"
+              mb={1}
+              href={`${
+                user.links.html
+              }?utm_source=splashnchill&utm_medium=referral`}
+            >
+              {user.name}
+            </Text>
+            <Text
+              fontSize={1}
+              color="white"
+              as="a"
+              target="_blank"
+              href={`https://unsplash.com/?utm_source=splashnchill&utm_medium=referral`}
+            >
+              Unsplash
+            </Text>
+          </View>
         </Flex>
       </View>
     );

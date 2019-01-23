@@ -1,9 +1,14 @@
 import React, {Component} from "react";
 import {ThemeProvider} from "styled-components";
+import {Router} from "@reach/router";
 
 import theme from "./theme";
 import GlobalStyle from "./GlobalStyle";
-import Browser from "../components/Browser";
+
+import Recent from "../pages/Recent";
+import Search from "../pages/Search";
+import Collection from "../pages/Collection";
+import NotFound from "../pages/NotFound";
 
 export default class App extends Component {
   render() {
@@ -11,7 +16,12 @@ export default class App extends Component {
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyle />
-          <Browser />
+          <Router>
+            <Recent path="/" />
+            <Search path="/search/:query" />
+            <Collection path="/collections/:collectionId" />
+            <NotFound default />
+          </Router>
         </>
       </ThemeProvider>
     );

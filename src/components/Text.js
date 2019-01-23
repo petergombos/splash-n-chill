@@ -11,7 +11,8 @@ import {
   lineHeight,
   fontWeight,
   fontStyle,
-  letterSpacing
+  letterSpacing,
+  display
 } from "styled-system";
 
 const Text = styled.div`
@@ -27,6 +28,11 @@ const Text = styled.div`
   ${fontWeight}
   ${fontStyle}
   ${letterSpacing}
+  ${display}
 `;
+
+Text.defaultProps = {
+  display: "block"
+};
 
 export default Text;

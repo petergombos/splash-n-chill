@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 
 import Photo from "./Photo";
-import Text from "./Text";
+import Status from "./Status";
 import api from "../utils/api.js";
+
+const LIMIT = 10;
 
 export default class Browser extends Component {
   state = {
@@ -70,17 +72,21 @@ export default class Browser extends Component {
 
   isFetching = false;
   fetchNextBatch = async () => {
+    const {currentPage, isLastPage} = this.state;
+    const {endpoint} = this.props;
+
     // Prevent double fetching the same page
-    if (this.isFetching) {
+    if (this.isFetching || isLastPage) {
       return;
     } else {
       this.isFetching = true;
     }
-    const {currentPage} = this.state;
     const nextPage = currentPage + 1;
 
     // Grab new images from API
-    const {data} = await api.get(`/photos?page=${nextPage}`);
+    const data = await api.get(
+      `${endpoint}${endpoint.indexOf("?") > -1 ? "&" : "?"}page=${nextPage}`
+    );
 
     // Prefetch normal size images
     this.preFetchImages(data);
@@ -88,7 +94,8 @@ export default class Browser extends Component {
     // Update state
     this.setState(state => ({
       photos: state.photos ? [...state.photos, ...data] : data,
-      currentPage: nextPage
+      currentPage: nextPage,
+      isLastPage: data.length < LIMIT ? true : false
     }));
 
     this.isFetching = false;
@@ -109,7 +116,13 @@ export default class Browser extends Component {
     const {photos, currentIndex} = this.state;
 
     if (!photos) {
-      return <Text>Loading...</Text>;
+      return (
+        <Status>
+          <span role="img" aria-label="loading">
+            📸
+          </span>
+        </Status>
+      );
     }
 
     const previousPhoto = photos[currentIndex - 1];

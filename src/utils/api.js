@@ -10,4 +10,14 @@ const api = axios.create({
   }
 });
 
+const responseTypeInterceptor = ({data}) => {
+  if (data.results) {
+    console.log(data.results);
+    return data.results;
+  }
+  return data;
+};
+
+api.interceptors.response.use(responseTypeInterceptor);
+
 export default api;
