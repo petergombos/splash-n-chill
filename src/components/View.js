@@ -31,6 +31,7 @@ import {
   justifySelf,
   alignSelf,
   order,
+  gridTemplateColumns,
   style,
   px
 } from "styled-system";
@@ -99,6 +100,7 @@ const View = styled.div`
   ${justifySelf}
   ${alignSelf}
   ${order}
+  ${gridTemplateColumns}
 `;
 
 export default View;

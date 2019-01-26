@@ -10,7 +10,8 @@ const theme = {
     ink: ["#333A43", "#46505C", "#596775"],
     sky: ["#F7FAFC", "#E1E3E6", "#ACAEB0"],
     primary: ["#65758A", "#526070", "#3F4A57"]
-  }
+  },
+  radii: [0, 4]
 };
 
 export default theme;
