@@ -5,6 +5,7 @@ import {Router} from "@reach/router";
 import theme from "./theme";
 import GlobalStyle from "./GlobalStyle";
 
+import Home from "../pages/Home";
 import Recent from "../pages/Recent";
 import Search from "../pages/Search";
 import Collection from "../pages/Collection";
@@ -19,7 +20,8 @@ export default class App extends Component {
           <GlobalStyle />
           <Fullscreen />
           <Router>
-            <Recent path="/" />
+            <Home path="/" />
+            <Recent path="/recent" />
             <Search path="/search/:query" />
             <Collection path="/collections/:collectionId" />
             <NotFound default />

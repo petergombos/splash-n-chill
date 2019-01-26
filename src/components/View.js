@@ -3,6 +3,8 @@ import {
   space,
   width,
   height,
+  maxHeight,
+  maxWidth,
   fontSize,
   color,
   borders,
@@ -65,6 +67,8 @@ const View = styled.div`
   ${space}
   ${width}
   ${height}
+  ${maxHeight}
+  ${maxWidth}
   ${fontSize}
   ${color}
   ${borders}
