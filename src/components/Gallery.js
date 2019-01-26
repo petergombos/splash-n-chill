@@ -159,19 +159,27 @@ export default class Gallery extends Component {
 
     return (
       <>
-        <Fullscreen />
-        {previousPhoto && (
-          <Photo
-            key={previousPhoto.id + "preload"}
-            data={previousPhoto}
-            display="none"
-          />
-        )}
-        <Photo key={currentPhoto.id} data={currentPhoto} prefetch={true} />
+        <Fullscreen>
+          {({toggleFullScreen}) => (
+            <Photo
+              key={currentPhoto.id}
+              data={currentPhoto}
+              prefetch={true}
+              onDoubleClick={toggleFullScreen}
+            />
+          )}
+        </Fullscreen>
         {nextPhoto && (
           <Photo
             key={nextPhoto.id + "preload"}
             data={nextPhoto}
+            display="none"
+          />
+        )}
+        {previousPhoto && (
+          <Photo
+            key={previousPhoto.id + "preload"}
+            data={previousPhoto}
             display="none"
           />
         )}

@@ -12,6 +12,10 @@ export class Fullscreen extends Component {
     toggleKeys: [13]
   };
 
+  state = {
+    isFullScreenEnabled: false
+  };
+
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
   }
@@ -20,7 +24,10 @@ export class Fullscreen extends Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  toggleFullScreen() {
+  toggleFullScreen = () => {
+    this.setState(({isFullScreenEnabled}) => ({
+      isFullScreenEnabled: !isFullScreenEnabled
+    }));
     const {onChange} = this.props;
     const fullscreenElement =
       document.fullscreenElement ||
@@ -48,7 +55,7 @@ export class Fullscreen extends Component {
         onChange(false);
       }
     }
-  }
+  };
 
   handleKeyDown = e => {
     const {toggleKeys} = this.props;
@@ -58,7 +65,11 @@ export class Fullscreen extends Component {
   };
 
   render() {
-    return null;
+    const {children} = this.props;
+    const {isFullScreenEnabled} = this.state;
+    return children
+      ? children({isFullScreenEnabled, toggleFullScreen: this.toggleFullScreen})
+      : null;
   }
 }
 
