@@ -13,6 +13,7 @@ export class Home extends Component {
             <a
               href="https://unsplash.com/?utm_source=splashnchill&utm_medium=referral"
               target="_blank"
+              rel="noopener noreferrer"
             >
               unsplash.com
             </a>
