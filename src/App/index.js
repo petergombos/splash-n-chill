@@ -10,7 +10,6 @@ import Recent from "../pages/Recent";
 import Search from "../pages/Search";
 import Collection from "../pages/Collection";
 import NotFound from "../pages/NotFound";
-import Fullscreen from "../components/Fullscreen";
 
 export default class App extends Component {
   render() {
@@ -18,7 +17,6 @@ export default class App extends Component {
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyle />
-          <Fullscreen />
           <Router>
             <Home path="/" />
             <Recent path="/recent" />

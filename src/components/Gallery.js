@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import Photo from "./Photo";
 import Status from "./Status";
+import Fullscreen from "./Fullscreen";
 import api from "../utils/api.js";
 
 const LIMIT = 10;
@@ -138,6 +139,7 @@ export default class Gallery extends Component {
 
     return (
       <>
+        <Fullscreen />
         {previousPhoto && (
           <Photo
             key={previousPhoto.id + "preload"}

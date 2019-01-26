@@ -25,7 +25,12 @@ export class Collections extends Component {
 
   componentDidMount() {
     this.handleFetch();
+    this.mounted = true;
     document.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   handleScroll = e => {
@@ -42,10 +47,11 @@ export class Collections extends Component {
     this.isFetching = true;
     const {currentPage, collections} = this.state;
     const data = await api.get(`/collections?page=${currentPage}`);
-    this.setState({
-      collections: collections ? [...collections, ...data] : data,
-      currentPage: currentPage + 1
-    });
+    this.mounted &&
+      this.setState({
+        collections: collections ? [...collections, ...data] : data,
+        currentPage: currentPage + 1
+      });
     this.isFetching = false;
   };
 
