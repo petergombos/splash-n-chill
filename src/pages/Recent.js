@@ -1,9 +1,9 @@
 import React from "react";
 
-import Browser from "../components/Browser";
+import Gallery from "../components/Gallery";
 
 function Recent() {
-  return <Browser endpoint="/photos" />;
+  return <Gallery endpoint="/photos" />;
 }
 
 export default Recent;

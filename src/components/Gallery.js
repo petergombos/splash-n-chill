@@ -7,7 +7,7 @@ import api from "../utils/api.js";
 const LIMIT = 10;
 const TIME_LIMIT = 5000;
 
-export default class Browser extends Component {
+export default class Gallery extends Component {
   state = {
     photos: null,
     currentIndex: 0,

@@ -1,9 +1,9 @@
 import React from "react";
 
-import Browser from "../components/Browser";
+import Gallery from "../components/Gallery";
 
 function Collection({collectionId}) {
-  return <Browser endpoint={`/collections/${collectionId}/photos`} />;
+  return <Gallery endpoint={`/collections/${collectionId}/photos`} />;
 }
 
 export default Collection;

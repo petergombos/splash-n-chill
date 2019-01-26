@@ -1,9 +1,9 @@
 import React from "react";
 
-import Browser from "../components/Browser";
+import Gallery from "../components/Gallery";
 
 function Search({query}) {
-  return <Browser endpoint={`/search/photos?query=${query}`} />;
+  return <Gallery endpoint={`/search/photos?query=${query}`} />;
 }
 
 export default Search;
