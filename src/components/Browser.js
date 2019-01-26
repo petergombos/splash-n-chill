@@ -5,12 +5,14 @@ import Status from "./Status";
 import api from "../utils/api.js";
 
 const LIMIT = 10;
+const TIME_LIMIT = 5000;
 
 export default class Browser extends Component {
   state = {
     photos: null,
     currentIndex: 0,
-    currentPage: 0
+    currentPage: 0,
+    isAutoplayOn: false
   };
 
   componentDidMount() {
@@ -22,22 +24,57 @@ export default class Browser extends Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  handleKeyDown = e => {
+  timer = 0;
+  toggleAutoPlay = () => {
+    this.setState(({isAutoplayOn}) => ({
+      isAutoplayOn: !isAutoplayOn
+    }));
+    this.handleAutoPlayTimerReset();
+  };
+
+  handleAutoPlayTimerReset = () => {
+    const {isAutoplayOn} = this.state;
+    clearTimeout(this.timer);
+    if (isAutoplayOn) {
+      this.timer = setTimeout(() => {
+        this.handleNextPhotoLoad();
+      }, TIME_LIMIT);
+    }
+  };
+
+  handlePreviousPhotoLoad = () => {
+    this.setState(state => ({
+      currentIndex: Math.max(state.currentIndex - 1, 0)
+    }));
+    this.handleAutoPlayTimerReset();
+  };
+
+  handleNextPhotoLoad = () => {
     const {photos, currentIndex} = this.state;
-    // Transition to the next photo
-    if (e.keyCode === 37) {
-      this.setState(state => ({
-        currentIndex: Math.max(state.currentIndex - 1, 0)
-      }));
-      // Transition to the previous photo
-    } else if (e.keyCode === 39) {
-      // Fetch new batch of photos if there is only 5 images left to display
-      if (photos.length - 6 === currentIndex) {
-        this.fetchNextBatch();
-      }
-      this.setState(state => ({
-        currentIndex: Math.min(state.currentIndex + 1, state.photos.length - 1)
-      }));
+    // Fetch new batch of photos if there is only 5 images left to display
+    if (photos.length - 6 === currentIndex) {
+      this.fetchNextBatch();
+    }
+    this.setState(state => ({
+      currentIndex: Math.min(state.currentIndex + 1, state.photos.length - 1)
+    }));
+    this.handleAutoPlayTimerReset();
+  };
+
+  handleKeyDown = e => {
+    // Transition to the previous photo
+    switch (e.keyCode) {
+      case 37: // Left arrow
+        this.handlePreviousPhotoLoad();
+        break;
+      case 39: // Right arrow
+        this.handleNextPhotoLoad();
+        break;
+      case 32: // Space
+        this.toggleAutoPlay();
+        break;
+      default:
+        break;
     }
   };
 
@@ -85,7 +122,6 @@ export default class Browser extends Component {
 
   render() {
     const {photos, currentIndex} = this.state;
-
     if (!photos) {
       return (
         <Status>
