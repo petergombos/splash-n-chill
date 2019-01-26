@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import Hero from "../../components/Hero";
 import MostRecent from "./MostRecent";
+import Collections from "./Collections";
 
 export class Home extends Component {
   render() {
@@ -23,7 +24,8 @@ export class Home extends Component {
             </span>
           }
         />
-        <MostRecent />
+        <MostRecent mb="80px" />
+        <Collections mb="80px" />
       </>
     );
   }

@@ -36,7 +36,12 @@ function Hero({title, subtitle, ...rest}) {
         {title}
       </Title>
       <View maxWidth="768px" mx="auto">
-        <Heading color="white" fontSize={["22px", "36px"]} textAlign="center">
+        <Heading
+          color="white"
+          fontSize={["22px", "36px"]}
+          textAlign="center"
+          fontWeight="regular"
+        >
           {subtitle}
         </Heading>
       </View>

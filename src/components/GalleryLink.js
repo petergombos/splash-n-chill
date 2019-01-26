@@ -53,7 +53,7 @@ export default function GalleryLink({photos, linkTo, ...rest}) {
             visibility: hidden;
           }
           &:hover {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.5);
             * {
               visibility: visible;
             }
