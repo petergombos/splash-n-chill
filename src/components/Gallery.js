@@ -1,7 +1,10 @@
 import React, {Component} from "react";
+import {Link} from "@reach/router";
 
 import Photo from "./Photo";
 import Status from "./Status";
+import View from "./View";
+import Text from "./Text";
 import Fullscreen from "./Fullscreen";
 import api from "../utils/api.js";
 
@@ -123,12 +126,29 @@ export default class Gallery extends Component {
 
   render() {
     const {photos, currentIndex} = this.state;
+    const {query} = this.props;
     if (!photos) {
       return (
         <Status>
           <span role="img" aria-label="loading">
             📸
           </span>
+        </Status>
+      );
+    }
+
+    if (!photos.length) {
+      return (
+        <Status>
+          <View mb={5}>
+            <span role="img" aria-label="loading">
+              🤷🏻‍♂️
+            </span>{" "}
+            No results found{query && `for: ${query}`}
+          </View>
+          <Text color="ink.1" fontSize="32px" as={Link} to="/">
+            Back
+          </Text>
         </Status>
       );
     }

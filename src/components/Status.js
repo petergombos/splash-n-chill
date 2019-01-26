@@ -12,7 +12,7 @@ function Status({children, ...rest}) {
       justifyContent="center"
       {...rest}
     >
-      <Text fontSize={8} color="white">
+      <Text fontSize={8} color="white" textAlign="center">
         {children}
       </Text>
     </Flex>

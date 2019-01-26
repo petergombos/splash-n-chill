@@ -5,7 +5,6 @@ import View from "./View";
 
 const Button = styled(View)`
   font-family: ${themeGet("fontFamilies.bitter")};
-  color: white;
   line-height: 1;
   font-size: 22px;
   cursor: pointer;
@@ -26,6 +25,7 @@ const Button = styled(View)`
 Button.defaultProps = {
   as: "button",
   bg: "primary.1",
+  color: "white",
   borderRadius: 1,
   py: "18px",
   px: 7
