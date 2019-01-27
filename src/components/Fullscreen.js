@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 export class Fullscreen extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    toggleKeys: PropTypes.array
+    toggleKeys: PropTypes.array,
+    disableOnUnmount: PropTypes.bool
   };
 
   static defaultProps = {
@@ -21,7 +22,12 @@ export class Fullscreen extends Component {
   }
 
   componentWillUnmount() {
+    const {disableOnUnmount} = this.props;
+    const {isFullScreenEnabled} = this.state;
     document.removeEventListener("keydown", this.handleKeyDown);
+    if (disableOnUnmount && isFullScreenEnabled) {
+      this.toggleFullScreen();
+    }
   }
 
   toggleFullScreen = () => {

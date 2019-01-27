@@ -175,7 +175,7 @@ export default class Gallery extends Component {
 
     return (
       <>
-        <Fullscreen toggleKeys={[70]}>
+        <Fullscreen toggleKeys={[70]} disableOnUnmount>
           {({toggleFullScreen, isFullScreenEnabled}) => (
             <View position="relative">
               <View
