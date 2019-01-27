@@ -32,21 +32,29 @@ export default class Search extends Component {
     const {query} = this.state;
     return (
       <View maxWidth="960px" mx={[3, "auto"]} {...this.props}>
-        <Title mb={7}>Something specific</Title>
-        <Flex as="form" onSubmit={this.handleSearchSubmit}>
+        <Title mb={[5, 7]}>Something specific</Title>
+        <Flex
+          as="form"
+          onSubmit={this.handleSearchSubmit}
+          flexDirection={["column", "row"]}
+        >
           <TextInput
             value={query}
             onChange={this.handleInputChange}
             placeholder="Search by tags like: music, nature, love…"
             flex="1"
-            borderRadius="4px 0 0 4px"
+            borderRadius={[0, "4px 0 0 4px"]}
             left={
               <View color="ink.2" px={5}>
                 <SearchSvg width="24px" />
               </View>
             }
           />
-          <Button borderRadius="0 4px 4px 0" disabled={!query}>
+          <Button
+            borderRadius={[0, "0 4px 4px 0"]}
+            width={["100%", "auto"]}
+            disabled={!query}
+          >
             Search
           </Button>
         </Flex>

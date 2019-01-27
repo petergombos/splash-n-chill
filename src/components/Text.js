@@ -46,7 +46,7 @@ export default Text;
 export const Title = styled(Text)``;
 Title.defaultProps = {
   ...Text.defaultProps,
-  fontSize: 7,
+  fontSize: [5, 7],
   color: "ink.0",
   fontFamily: "Bitter"
 };
@@ -56,7 +56,7 @@ export const Heading = styled(Text)`
 `;
 Heading.defaultProps = {
   ...Text.defaultProps,
-  fontSize: 5,
+  fontSize: [3, 5],
   color: "ink.1",
   fontWeight: "semibold"
 };
@@ -66,6 +66,6 @@ export const Caption = styled(Text)`
 `;
 Caption.defaultProps = {
   ...Text.defaultProps,
-  fontSize: 2,
+  fontSize: [1, 2],
   color: "ink.3"
 };

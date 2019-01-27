@@ -21,7 +21,7 @@ export class MostRecent extends Component {
     const {photos} = this.state;
     return (
       <View maxWidth="960px" mx={[3, "auto"]} {...this.props}>
-        <Title mb={7}>Most recent</Title>
+        <Title mb={[5, 7]}>Most recent</Title>
         <GalleryLink photos={photos} linkTo="/recent" />
       </View>
     );

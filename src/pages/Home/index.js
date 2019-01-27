@@ -10,7 +10,7 @@ export class Home extends Component {
     return (
       <>
         <Hero
-          mb="80px"
+          mb={["40px", "80px"]}
           title="Splash n' Chill"
           subtitle={
             <span>
@@ -25,9 +25,9 @@ export class Home extends Component {
             </span>
           }
         />
-        <MostRecent mb="80px" />
-        <Search mb="80px" />
-        <Collections mb="80px" />
+        <MostRecent mb={["40px", "80px"]} />
+        <Search mb={["40px", "80px"]} />
+        <Collections mb={["40px", "80px"]} />
       </>
     );
   }
