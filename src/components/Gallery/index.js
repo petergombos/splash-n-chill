@@ -10,6 +10,8 @@ import Pagination from "./Pagination";
 import Controls from "./Controls";
 import api from "../../utils/api.js";
 
+import {ReactComponent as HomeIcon} from "./assets/home-solid.svg";
+
 const LIMIT = 10;
 const TIME_LIMIT = 5000;
 
@@ -176,6 +178,22 @@ export default class Gallery extends Component {
         <Fullscreen toggleKeys={[70]}>
           {({toggleFullScreen, isFullScreenEnabled}) => (
             <View position="relative">
+              <View
+                top="0"
+                left="0"
+                zIndex="20"
+                position="absolute"
+                width="20%"
+              >
+                <Link to="/">
+                  <View
+                    as={HomeIcon}
+                    width="28px"
+                    p={3}
+                    color="rgba(255, 255, 255, 0.7)"
+                  />
+                </Link>
+              </View>
               <Pagination
                 onNext={this.handleNextPhotoLoad}
                 onPrevious={this.handlePreviousPhotoLoad}
