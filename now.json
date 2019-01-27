@@ -5,6 +5,7 @@
   "routes": [
     {"src": "^/static/(.*)", "dest": "/static/$1"},
     {"src": "^/favicon.png", "dest": "/favicon.png"},
+    {"src": "^/og.png", "dest": "/og.png"},
     {"src": "^/asset-manifest.json", "dest": "/asset-manifest.json"},
     {"src": "^/manifest.json", "dest": "/manifest.json"},
     {
