@@ -11,6 +11,7 @@ function Hero({title, subtitle, ...rest}) {
       backgroundSize="cover"
       py={["60px", "110px"]}
       px={["20px", "60px"]}
+      position="relative"
       css={`
         background-image: linear-gradient(
             -180deg,
