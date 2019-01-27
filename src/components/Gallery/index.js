@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import {Link} from "@reach/router";
 
-import Photo from "./Photo";
-import Status from "./Status";
-import View from "./View";
-import Text from "./Text";
-import Fullscreen from "./Fullscreen";
-import api from "../utils/api.js";
+import Photo from "../Photo";
+import Status from "../Status";
+import View from "../View";
+import Text from "../Text";
+import Fullscreen from "../Fullscreen";
+import api from "../../utils/api.js";
+import Pagination from "./Pagination";
 
 const LIMIT = 10;
 const TIME_LIMIT = 5000;
@@ -161,12 +162,18 @@ export default class Gallery extends Component {
       <>
         <Fullscreen>
           {({toggleFullScreen}) => (
-            <Photo
-              key={currentPhoto.id}
-              data={currentPhoto}
-              prefetch={true}
-              onDoubleClick={toggleFullScreen}
-            />
+            <View position="relative">
+              <Pagination
+                onNext={this.handleNextPhotoLoad}
+                onPrevious={this.handlePreviousPhotoLoad}
+              />
+              <Photo
+                key={currentPhoto.id}
+                data={currentPhoto}
+                prefetch={true}
+                onDoubleClick={toggleFullScreen}
+              />
+            </View>
           )}
         </Fullscreen>
         {nextPhoto && (
