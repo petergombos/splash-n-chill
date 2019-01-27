@@ -17,7 +17,6 @@ function User({data: user, ...rest}) {
           color="white"
           as="a"
           target="_blank"
-          mb={1}
           href={`${
             user.links.html
           }?utm_source=splashnchill&utm_medium=referral`}
