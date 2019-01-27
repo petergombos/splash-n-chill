@@ -46,10 +46,12 @@ export class Photo extends Component {
       <View
         bg="black"
         style={{
-          backgroundImage: `url(${isFullLoaded ? this.full.src : urls.regular})`
+          backgroundImage: `url(${
+            isFullLoaded ? this.full.src : urls.regular
+          })`,
+          backgroundRepeat: "no-repeat"
         }}
         backgroundPosition="center"
-        backgroundSize="cover"
         height="100vh"
         width="100%"
         {...rest}

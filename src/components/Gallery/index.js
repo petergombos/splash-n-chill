@@ -6,8 +6,9 @@ import Status from "../Status";
 import View from "../View";
 import Text from "../Text";
 import Fullscreen from "../Fullscreen";
-import api from "../../utils/api.js";
 import Pagination from "./Pagination";
+import Controls from "./Controls";
+import api from "../../utils/api.js";
 
 const LIMIT = 10;
 const TIME_LIMIT = 5000;
@@ -17,7 +18,8 @@ export default class Gallery extends Component {
     photos: null,
     currentIndex: 0,
     currentPage: 0,
-    isAutoplayOn: false
+    isAutoplayOn: false,
+    backgroundSize: "cover"
   };
 
   componentDidMount() {
@@ -29,12 +31,20 @@ export default class Gallery extends Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
+  toggleBackgroundSize = () => {
+    this.setState(({backgroundSize}) => ({
+      backgroundSize: backgroundSize === "cover" ? "contain" : "cover"
+    }));
+  };
+
   timer = 0;
   toggleAutoPlay = () => {
-    this.setState(({isAutoplayOn}) => ({
-      isAutoplayOn: !isAutoplayOn
-    }));
-    this.handleAutoPlayTimerReset();
+    this.setState(
+      ({isAutoplayOn}) => ({
+        isAutoplayOn: !isAutoplayOn
+      }),
+      () => this.handleAutoPlayTimerReset()
+    );
   };
 
   handleAutoPlayTimerReset = () => {
@@ -77,6 +87,9 @@ export default class Gallery extends Component {
         break;
       case 32: // Space
         this.toggleAutoPlay();
+        break;
+      case 13: // Enter
+        this.toggleBackgroundSize();
         break;
       default:
         break;
@@ -126,7 +139,7 @@ export default class Gallery extends Component {
   };
 
   render() {
-    const {photos, currentIndex} = this.state;
+    const {photos, currentIndex, backgroundSize, isAutoplayOn} = this.state;
     const {query} = this.props;
     if (!photos) {
       return (
@@ -160,18 +173,27 @@ export default class Gallery extends Component {
 
     return (
       <>
-        <Fullscreen>
-          {({toggleFullScreen}) => (
+        <Fullscreen toggleKeys={[70]}>
+          {({toggleFullScreen, isFullScreenEnabled}) => (
             <View position="relative">
               <Pagination
                 onNext={this.handleNextPhotoLoad}
                 onPrevious={this.handlePreviousPhotoLoad}
+              />
+              <Controls
+                isFullScreenEnabled={isFullScreenEnabled}
+                onFullScreenToggle={toggleFullScreen}
+                isAutoplayOn={isAutoplayOn}
+                onAutoPlayToggle={this.toggleAutoPlay}
+                backgroundSize={backgroundSize}
+                onPhotoSizeToggle={this.toggleBackgroundSize}
               />
               <Photo
                 key={currentPhoto.id}
                 data={currentPhoto}
                 prefetch={true}
                 onDoubleClick={toggleFullScreen}
+                backgroundSize={backgroundSize}
               />
             </View>
           )}
