@@ -21,7 +21,8 @@ export default class Gallery extends Component {
     currentIndex: 0,
     currentPage: 0,
     isAutoplayOn: false,
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    backgroundPositionY: 50
   };
 
   componentDidMount() {
@@ -32,6 +33,19 @@ export default class Gallery extends Component {
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
+
+  handleBackgroundPositionChange = amount => {
+    const {backgroundSize, backgroundPositionY} = this.state;
+    const newPosition =
+      amount < 0
+        ? Math.max(backgroundPositionY + amount, 0)
+        : Math.min(backgroundPositionY + amount, 100);
+    if (backgroundSize === "cover") {
+      this.setState({
+        backgroundPositionY: newPosition
+      });
+    }
+  };
 
   toggleBackgroundSize = () => {
     this.setState(({backgroundSize}) => ({
@@ -73,7 +87,8 @@ export default class Gallery extends Component {
       this.fetchNextBatch();
     }
     this.setState(state => ({
-      currentIndex: Math.min(state.currentIndex + 1, state.photos.length - 1)
+      currentIndex: Math.min(state.currentIndex + 1, state.photos.length - 1),
+      backgroundPositionY: 50
     }));
     this.handleAutoPlayTimerReset();
   };
@@ -86,6 +101,12 @@ export default class Gallery extends Component {
         break;
       case 39: // Right arrow
         this.handleNextPhotoLoad();
+        break;
+      case 38: // Up arrow
+        this.handleBackgroundPositionChange(-10);
+        break;
+      case 40: // down arrow
+        this.handleBackgroundPositionChange(10);
         break;
       case 32: // Space
         this.toggleAutoPlay();
@@ -141,7 +162,13 @@ export default class Gallery extends Component {
   };
 
   render() {
-    const {photos, currentIndex, backgroundSize, isAutoplayOn} = this.state;
+    const {
+      photos,
+      currentIndex,
+      backgroundSize,
+      backgroundPositionY,
+      isAutoplayOn
+    } = this.state;
     const {query} = this.props;
     if (!photos) {
       return (
@@ -212,6 +239,7 @@ export default class Gallery extends Component {
                 prefetch={true}
                 onDoubleClick={toggleFullScreen}
                 backgroundSize={backgroundSize}
+                backgroundPositionY={backgroundPositionY}
               />
             </View>
           )}

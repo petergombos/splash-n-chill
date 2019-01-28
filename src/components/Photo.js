@@ -39,6 +39,7 @@ export class Photo extends Component {
   render() {
     const {
       data: {urls, user},
+      backgroundPositionY,
       ...rest
     } = this.props;
     const {isFullLoaded} = this.state;
@@ -51,7 +52,7 @@ export class Photo extends Component {
           })`,
           backgroundRepeat: "no-repeat"
         }}
-        backgroundPosition="center"
+        backgroundPosition={`center ${backgroundPositionY}%`}
         height="100vh"
         width="100%"
         {...rest}
