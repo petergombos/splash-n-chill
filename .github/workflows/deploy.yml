@@ -1,0 +1,16 @@
+name: DigitalOcean Deployment
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: pego.dev
+          username: deploy
+          password: ${{ secrets.PASSWORD }}
+          script: cd /home/deploy/splash-n-chill && git pull && docker-compose down && docker-compose up -d --build

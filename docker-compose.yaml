@@ -1,0 +1,16 @@
+version: "2"
+services:
+  unsplash-cra:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      - VIRTUAL_HOST=unsplash.pego.dev
+      - LETSENCRYPT_HOST=unsplash.pego.dev
+    networks:
+      - webproxy
+
+networks:
+  webproxy:
+    external: true
